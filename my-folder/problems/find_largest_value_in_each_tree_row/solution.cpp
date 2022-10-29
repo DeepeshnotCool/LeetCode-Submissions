@@ -14,17 +14,13 @@ public:
     vector<int> largestValues(TreeNode* root) {
         vector<int> v;
         if(root == NULL)
-        {
             return v;
-        }
         queue<TreeNode*> q;
         q.push(root);
-        while(!q.empty())
-        {
+        while(!q.empty()){
             int size = q.size();
             int maxi = INT_MIN;
-            for(int i = 0; i < size; i++)
-            {
+            for(int i = 0; i < size; i++){
                 auto front = q.front();
                 q.pop();
                 maxi = max(front -> val, maxi);
@@ -36,5 +32,7 @@ public:
             v.push_back(maxi);
         }
         return v;
+        
+        
     }
 };
