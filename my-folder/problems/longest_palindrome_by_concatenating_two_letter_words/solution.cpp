@@ -1,26 +1,22 @@
 class Solution {
 public:
     int longestPalindrome(vector<string>& words) {
-       
         map<string, int> m;
-        int count = 0;
         for(auto it: words){
-            string rev = it;
-            reverse(rev.begin(), rev.end());
-            if(m[rev]){
-                count += 4;
-                m[rev]--;
-            } else{
-                m[it]++;
-            }
-        }
+            m[it]++;
+        }   
 
+        int total = 0, odd = 0;
         for(auto it: m){
-            if(it.first[0] == it.first[1] && it.second > 0){
-                count += 2;
-                break;
+            if(it.first[0] == it.first[1]){
+                total += (m[it.first]/2) * 2 * 2;
+                odd = max(odd, (m[it.first] % 2) * 2);
+            } else if(it.first[0] < it.first[1]){
+                string rev = it.first;
+                reverse(rev.begin(), rev.end());
+                total += min(m[it.first], m[rev]) * 2 * 2;
             }
         }
-        return count;
+        return total + odd;
     }
 };
